@@ -1,0 +1,16 @@
+{
+    "name": "Farmstock",
+    "short_name": "Farmstock",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#0000",
+    "background_color": "#FFFFFF",
+    "start_url": "/dashboard",
+    "display": "standalone",
+    "orientation": "portrait"
+}
