@@ -26,7 +26,7 @@ export default function Home() {
   }, [user])
 
   return (
-    <main className="flex flex-col justify-center items-center relative min-h-screen isolate">
+    <main className="flex flex-col justify-center items-center relative h-screen isolate">
       <Head>
         <title>Welcome to Farmstock</title>
       </Head>
