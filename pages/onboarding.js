@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useLayoutEffect, useState } from 'react';
 import Input from '../components/Input';
 
 import Head from 'next/head';
@@ -13,7 +13,14 @@ export default function Home() {
 
   const router = useRouter();
   const [form, setForm] = useState({});
-  const { user, setUserDetails } = useContext(UserContext);
+  const { user, userDetails, setUserDetails } = useContext(UserContext);
+
+  useLayoutEffect(() => {
+    if(userDetails){
+      return () => router.push("/dashboard");
+    }
+
+  }, [userDetails]);
   
   const handleSubmit = () => {
     add_doc("farms", user.uid, form)

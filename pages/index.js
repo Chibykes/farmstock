@@ -1,29 +1,44 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { AiOutlineGoogle } from 'react-icons/ai';
-import { signIn } from '../hooks/firebase';
-import { useContext, useEffect } from 'react';
+import { get_single_doc, signIn } from '../hooks/firebase';
+import { useContext, useEffect, useLayoutEffect } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { useRouter } from 'next/router';
 
 
 export default function Home() {
 
-  const {user} = useContext(UserContext);
+  const { user, setUserDetails } = useContext(UserContext);
   const router = useRouter();
 
-  useEffect(() => {
-
+  useLayoutEffect(() => {
     if(user){
-      let passed = localStorage.getItem("passed_onboarding");
-      if(!passed){
-        router.push("/onboarding");
-      }
-  
-      router.push("/dashboard");
-    }
+      get_single_doc("farms", user.uid)
+      .then(details => {
 
-  }, [user])
+        if(!details){
+          return router.push("/onboarding");
+        }
+        
+        setUserDetails(details);
+        return router.push("/dashboard");
+
+      })
+    }
+  }, [user]);
+
+  // useEffect(() => {
+
+  //   if(user){
+  //     if(!userDetails){
+  //       return () => router.push("/onboarding");
+  //     }
+  
+  //     return () => router.push("/dashboard");
+  //   }
+
+  // }, [user, userDetails])
 
   return (
     <main className="flex flex-col justify-center items-center relative h-screen isolate">

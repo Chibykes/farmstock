@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { BsArrowLeft } from "react-icons/bs"
 import { UserContext } from "../contexts/UserContext";
+import { signOut } from "../hooks/firebase";
 
 
 export default function Navbar({ text, noback }) {
 
     const router = useRouter();
-    const { user } = useContext(UserContext);
+    const { user, setUser, setUserDetails } = useContext(UserContext);
 
     return(
         <nav className='print:hidden flex justify-between items-center'>
@@ -36,7 +37,12 @@ export default function Navbar({ text, noback }) {
             </div>
 
 
-            <div className=''>
+            <div className='' onClick={() => { 
+                    signOut();
+                    setUser(null);
+                    setUserDetails(null);
+                    router.push('/') 
+                }}>
                 <div className='w-14 h-14 grid place-content-center border-[3px] border-lime-600 rounded-full'>
                     <div className='relative w-12 h-12 rounded-full overflow-hidden'>
                     <Image

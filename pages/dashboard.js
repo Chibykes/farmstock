@@ -68,7 +68,7 @@ export default function Home() {
       <section className='py-12'>
 
         <p className='font-bold text-2xl capitalize'>
-          Hello, {userDetails.farm_name} 👋
+          Hello, {userDetails?.farm_name} 👋
         </p>
 
         <div className='max-w-md mx-auto'>
