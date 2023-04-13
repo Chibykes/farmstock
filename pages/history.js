@@ -52,8 +52,8 @@ export default function Home() {
                   <p className='text-xs text-neutral-600'>ID: {id}</p>
                 </div>
 
-                <p className='text-2xl text-green-500 font-bold'>
-                  - &#8358; {Number(amount).toLocaleString()}
+                <p className='text-lg text-green-500 font-bold'>
+                  + &#8358;{Number(amount).toLocaleString()}
                 </p>
               </div>}
             
@@ -67,8 +67,8 @@ export default function Home() {
                   <p className='text-xs text-neutral-600'>ID: {id}</p>
                 </div>
 
-              <p className='text-2xl text-red-600 font-bold'>
-                - &#8358; {Number(amount).toLocaleString()}
+              <p className='text-lg text-red-600 font-bold'>
+                - &#8358;{Number(amount).toLocaleString()}
               </p>
             </div>}
           </Link>
