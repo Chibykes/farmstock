@@ -136,7 +136,7 @@ export default function Home() {
 
       <section className='py-12 divide-y'>
 
-        <div className='mb-12 p-4 bg-gradient-to-t from-green-900 via-green-800 to-green-600 shadow-2xl rounded-xl'>
+        <div className='mb-12 p-4 bg-green-900 from-green-900 via-green-800 to-lime-700 shadow-2xl rounded-xl'>
           <div className='text-white font-bold'>Net Income</div>
 
           <Line

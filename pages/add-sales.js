@@ -26,6 +26,18 @@ export default function Home() {
   });
   const [itemsBuying, setItemsBuying] = useState({});
 
+  const compareFn = (a,b) => {
+      let c = a.name.toLowerCase();
+      let d = b.name.toLowerCase();
+      if (c > d) {
+        return 1;
+      }
+      if (c < d) {
+        return -1;
+      }
+      return 0;
+  }
+
   const handleItemsSubmit = () => {
     setItems(items.map(item => { 
       if(itemsBuying.id === item.id) return ({ ...item, stock: Number(item.stock) - Number(itemsBuying.buying || 0) });
@@ -41,7 +53,8 @@ export default function Home() {
     add_doc("transactions", form.id, { ...form, uid: user?.uid })
       .then(async(success) => {
 
-        await Promise.all(items.map(item => add_doc("farm_items", item.id, item)));
+        console.log(success);
+        await Promise.all(items.map(item => add_doc("farm_items", item.id, item, false)));
 
         setForm({ 
           id: gen(16), 
@@ -110,7 +123,7 @@ export default function Home() {
         </div>
 
         <div id='itemsBought' className='items flex gap-4 overflow-auto'>
-          {form.items.map(({ icon, name, price, buying }, index) => (
+          {form.items.sort(compareFn).map(({ icon, name, price, buying }, index) => (
             <div key={index} className='shrink-0 p-2 rounded-md bg-green-900 border-2 border-green-900 text-lime-400 space-y-3 !w-4/6 divide-y'>
               <div className='flex justify-between'>
                 <p className=''><strong>{index+1}</strong>. {icon} {name}</p>

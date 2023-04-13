@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
-import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore";
+import { Timestamp, collection, doc, getDoc, getDocs, getFirestore, orderBy, query, setDoc, where } from "firebase/firestore";
 
 import { GoogleAuthProvider, getAuth, signInWithPopup, signOut as signout } from "firebase/auth";
 import toast from 'react-hot-toast';
@@ -51,11 +51,17 @@ function signOut(){
   });
 }
 
-async function add_doc(collection, id, topic, toast=true){
-  if (!toast) return setDoc(doc(db, collection, id), topic, { merge: true });
+async function add_doc(collection, id, topic, showToast=true){
+  if (!showToast) return setDoc(doc(db, collection, id), {
+    ...topic,
+    createdAt: Timestamp.now()
+  }, { merge: true });
 
   return toast.promise(
-      setDoc(doc(db, collection, id), topic, { merge: true }),
+      setDoc(doc(db, collection, id), {
+        ...topic,
+        createdAt: Timestamp.now()
+      }, { merge: true }),
     {
       success: "Task Succesful",
       error: "Task Failed",
@@ -90,7 +96,8 @@ async function uploadFile(name, type, string){
 
 async function read_database(dbname, uid){
   const data = [];
-  const q = query(collection(db, dbname), where("uid", "==", uid));
+  const q = query(collection(db, dbname), where("uid", "==", uid), orderBy("createdAt", "desc"));
+
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => data.push(doc.data()));
   console.log(data);
