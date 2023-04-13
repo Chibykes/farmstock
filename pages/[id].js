@@ -1,5 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 import { AiFillPrinter } from 'react-icons/ai';
+import { CgSpinner } from 'react-icons/cg';
 
 import Head from 'next/head';
 import Image from 'next/image';
@@ -12,7 +13,7 @@ import { get_single_doc } from '../hooks/firebase';
 export default function Home() {
 
   const router = useRouter();
-  const [trx, setTrx] = useState();
+  const [trx, setTrx] = useState(null);
   
   useLayoutEffect(() => {
     if(router?.query?.id){
@@ -24,7 +25,7 @@ export default function Home() {
 
 
   return (
-    <main className="relative min-h-screen max-w-md mx-auto px-5 py-8 isolate">
+    <main className="min-h-screen max-w-md mx-auto px-5 py-8 isolate">
 
       <Head>
         <title>Transaction</title>
@@ -136,6 +137,15 @@ export default function Home() {
         </div>
 
       </section>}
+
+      {!trx &&
+
+        <div className="py-12 flex flex-col gap-2 justify-center items-center">
+          <CgSpinner className="text-lime-500 text-2xl animate-spin" />
+          <p className='text-2xl text-green-900 font-bold'>Loading...</p>
+        </div>
+
+      }
 
       <div className='flex justify-center'>
           <p 

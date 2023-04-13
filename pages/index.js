@@ -28,18 +28,6 @@ export default function Home() {
     }
   }, [user]);
 
-  // useEffect(() => {
-
-  //   if(user){
-  //     if(!userDetails){
-  //       return () => router.push("/onboarding");
-  //     }
-  
-  //     return () => router.push("/dashboard");
-  //   }
-
-  // }, [user, userDetails])
-
   return (
     <main className="flex flex-col justify-center items-center relative h-screen isolate">
       <Head>

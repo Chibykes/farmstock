@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { AiOutlineGoogle, AiOutlineMinus, AiOutlinePieChart, AiOutlinePlus } from 'react-icons/ai';
+import { RiFileHistoryFill } from 'react-icons/ri';
 import { GiCow } from 'react-icons/gi';
 import Navbar from '../components/Navbar';
 import Head from 'next/head';
@@ -73,6 +74,20 @@ export default function Home() {
 
         <div className='max-w-md mx-auto'>
           <div className='grid grid-cols-2 gap-4 py-12'>
+
+            <div className='flex justify-end col-span-2'>
+              <Link 
+                  href="/history"
+                  className="
+                      inline-flex gap-2 items-center
+                      bg-lime-300 text-green-900 text-xs 
+                      rounded-full px-4 py-1 font-bold
+                  "
+              >
+                  <RiFileHistoryFill />
+                  Transaction History
+              </Link>
+            </div>
 
             {menu.map(({ Icon, title, subtitle, link }, index) => (
               <Link href={link} key={index} className='inline-block relative isolate'>

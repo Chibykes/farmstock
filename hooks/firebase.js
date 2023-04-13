@@ -51,7 +51,9 @@ function signOut(){
   });
 }
 
-async function add_doc(collection, id, topic){
+async function add_doc(collection, id, topic, toast=true){
+  if (!toast) return setDoc(doc(db, collection, id), topic, { merge: true });
+
   return toast.promise(
       setDoc(doc(db, collection, id), topic, { merge: true }),
     {

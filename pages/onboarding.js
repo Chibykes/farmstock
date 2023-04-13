@@ -33,7 +33,7 @@ export default function Home() {
 
 
   return (
-    <main className="relative min-h-screen max-w-md mx-auto px-5 py-8 isolate">
+    <main className="min-h-screen max-w-md mx-auto px-5 py-8 isolate">
 
       <Head>
         <title>Onboarding</title>

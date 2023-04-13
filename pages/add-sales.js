@@ -27,16 +27,22 @@ export default function Home() {
   const [itemsBuying, setItemsBuying] = useState({});
 
   const handleItemsSubmit = () => {
+    setItems(items.map(item => { 
+      if(itemsBuying.id === item.id) return ({ ...item, stock: Number(item.stock) - Number(itemsBuying.buying || 0) });
+      return item
+    }))
     setForm({ ...form, items: [...form.items, itemsBuying]});
     setItemsBuying({});
-
   }
 
   const { user } = useContext(UserContext);
+
   const handleSubmit = () => {
     add_doc("transactions", form.id, { ...form, uid: user?.uid })
-      .then((success) => {
-        console.log(success)
+      .then(async(success) => {
+
+        await Promise.all(items.map(item => add_doc("farm_items", item.id, item)));
+
         setForm({ 
           id: gen(16), 
           items: [],
@@ -51,13 +57,15 @@ export default function Home() {
   }
 
   useLayoutEffect(() => {
-    (async() => {
-      setItems(await read_database("farm_items", user?.uid));
-    })();
+    if(user){
+      (async() => {
+        setItems(await read_database("farm_items", user?.uid));
+      })();
+    }
   }, [user]);
 
   return (
-    <main className="relative min-h-screen max-w-md mx-auto px-5 py-8 isolate">
+    <main className="min-h-screen max-w-md mx-auto px-5 py-8 isolate">
 
       <Head>
         <title>Add Sales</title>
@@ -199,7 +207,7 @@ export default function Home() {
         <div className=''>Choose Item</div>
         <div className='flex flex-wrap gap-2'>
           {items.map(({ id, icon, name, stock, unit, price}) => (
-            <div key={unit} className={`
+            <div key={id} className={`
               bg-transparent space-y-1 px-4 py-1 border-2 rounded-md text-sm
               ${itemsBuying.id === id 
                 ? 'border-lime-600 bg-lime-100' 
