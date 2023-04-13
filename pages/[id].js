@@ -57,7 +57,7 @@ export default function Home() {
 
       {trx?.trx_type === "credit" && <section className='py-6 divide-y'>
         
-        <div className='py-3 space-y-1 text-xs items-center justify-between'>
+        <div className='py-4 space-y-1 text-xs items-center justify-between'>
             Transaction Type:
             <p className='text-lg font-bold'>
               Sales
@@ -108,7 +108,7 @@ export default function Home() {
 
       {trx?.trx_type === "debit" && <section className='py-6 divide-y'>
         
-        <div className='py-3 space-y-1 text-xs items-center justify-between'>
+        <div className='py-4 space-y-1 text-xs items-center justify-between'>
             Transaction Type:
             <p className='text-lg font-bold'>
               Expenses

@@ -112,7 +112,7 @@ export default function Home() {
       pointBackgroundColor: 'rgb(20 83 45)',
       pointBorderColor: 'rgb(163 230 53)',
       pointRadius: 3,
-      tension: 0.5,
+      tension: 0.4,
       fill: true
     }]
   }
@@ -134,9 +134,9 @@ export default function Home() {
       <Navbar text='Performance' />
 
 
-      <section className='py-12  divide-y'>
+      <section className='py-12 divide-y'>
 
-        <div className='mb-12 p-4 bg-gradient-to-t from-green-900 via-green-800 to-lime-700 shadow-2xl rounded-xl'>
+        <div className='mb-12 p-4 bg-gradient-to-t from-green-900 via-green-800 to-green-600 shadow-2xl rounded-xl'>
           <div className='text-white font-bold'>Net Income</div>
 
           <Line
