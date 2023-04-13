@@ -47,7 +47,7 @@ export default function Navbar({ text, noback }) {
                     <div className='relative w-12 h-12 rounded-full overflow-hidden'>
                     <Image
                         className="object-cover"
-                        src={user?.photoURL}
+                        src={user?.photoURL || "logo.png"}
                         alt="" 
                         fill
                     />
